@@ -41,7 +41,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/muir-island/wordsmith-web/github-actions-templates:simple
+          images: ghcr.io/muir-island/wordsmith-web/github-actions-templates
           flavor: |
             latest=false
           tags: |

@@ -6,4 +6,4 @@ on:
 jobs:
  scan:
    name: Scan
-   uses: muir-island/actions/.github/workflows/reusable-trivy.yml@<pr-branch-name>
+   uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main

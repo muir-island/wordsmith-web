@@ -8,9 +8,10 @@ on:
   workflows: ["Docker Build"]
   types:
     - completed
+
 jobs:
- scan:
-   name: Scan
-   uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main
-   with:
-    image: 'ghcr.io/muir-island/wordsmith-web:latest'
+  scan:
+    name: Scan
+    uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main
+    with:
+      image: 'ghcr.io/muir-island/wordsmith-web:latest'

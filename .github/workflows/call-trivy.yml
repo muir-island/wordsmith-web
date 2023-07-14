@@ -31,6 +31,7 @@ jobs:
         
   scan:
     name: Scan
+    needs: build
     uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main
     with:
       image: ${{ needs.build.outputs.image-tag }}

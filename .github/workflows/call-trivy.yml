@@ -19,7 +19,7 @@ jobs:
       pull-requests: write
     with:
       dockerhub-enable: false
-      ghcr-enable: false
+      ghcr-enable: true
       image-names: |
         ghcr.io/${{ github.repository }}
       tag-rules: |

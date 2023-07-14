@@ -1,8 +1,13 @@
+---
 name: Call Trivy
 on:
  push:
    branches: [main]
  pull_request:
+ workflow_run:
+  workflows: ["Docker Build"]
+  types:
+    - completed
 jobs:
  scan:
    name: Scan

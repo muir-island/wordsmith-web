@@ -34,4 +34,4 @@ jobs:
     needs: build
     uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main
     with:
-      image: ghcr.io/${{ needs.build.outputs.image-tag }}
+      image: ghcr.io/${{ github.repository }}:${{ needs.build.outputs.image-tag }}

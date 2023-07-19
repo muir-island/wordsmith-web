@@ -1,11 +1,37 @@
+---
 name: Call Trivy
 on:
  push:
    branches: [main]
  pull_request:
+ workflow_run:
+  workflows: ["Docker Build"]
+  types:
+    - completed
+
 jobs:
- scan:
-   name: Scan
-   uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main
-   with:
-    image: 'ghcr.io/muir-island/wordsmith-web:latest'
+  build:
+    name: Build Docker Image
+    uses: muir-island/actions/.github/workflows/reusable-docker-build.yml@main
+    permissions:
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      dockerhub-enable: false
+      ghcr-enable: true
+      image-names: |
+        ghcr.io/${{ github.repository }}
+      tag-rules: |
+        type=raw,value=gha-${{ github.run_id }},enable=${{ github.event_name == 'pull_request' }},priority=200
+        type=ref,event=pr,priority=100
+      platforms: linux/amd64,linux/arm64
+      push: true
+      comment-enable: false
+        
+  scan:
+    name: Scan
+    needs: build
+    uses: muir-island/actions/.github/workflows/reusable-trivy.yml@main
+    with:
+      image: ghcr.io/${{ github.repository }}:${{ needs.build.outputs.image-tag }}
